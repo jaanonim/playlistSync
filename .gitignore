@@ -1,0 +1,4 @@
+env
+.vscode
+client_secret.json
+credentials.json
