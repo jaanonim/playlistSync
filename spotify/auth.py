@@ -1,17 +1,25 @@
-import spotipy
-from spotipy.oauth2 import SpotifyOAuth
+import json
+import os
+
+file_name = "token.json"
 
 
 def auth():
-    scope = "user-library-read"
+    try:
+        f = open(file_name)
+        data = json.load(f)
+        token = data["token"]
+        f.close()
+        if token == None:
+            raise Exception
+    except Exception as e:
+        token = input("Enter spotify token: ")
+        with open(file_name, "w") as json_file:
+            json.dump({"token": token}, json_file)
+    return token
 
-    sp = spotipy.Spotify(
-        auth_manager=SpotifyOAuth(
-            scope=scope,
-        )
-    )
 
-    results = sp.current_user_saved_tracks()
-    for idx, item in enumerate(results["items"]):
-        track = item["track"]
-        print(idx, track["artists"][0]["name"], " – ", track["name"])
+def onInvalidToken():
+    print("ERROR: Invalid token!")
+    os.remove(file_name)
+    exit()

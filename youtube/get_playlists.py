@@ -4,7 +4,7 @@ from PyInquirer import prompt
 def getPlaylists(youtube):
 
     request = youtube.playlists().list(
-        part="snippet,contentDetails", maxResults=25, mine=True
+        part="snippet,contentDetails", maxResults=20, mine=True
     )
     response = request.execute()
     items = response["items"]
@@ -29,7 +29,7 @@ def getElementsOfPlaylist(id, youtube):
     for item in items:
         elements.append((item["contentDetails"]["videoId"], item["snippet"]["title"]))
 
-    print(elements)
+    return elements
 
 
 def getElementsPage(playlistId, youtube, page=None):
