@@ -7,13 +7,15 @@ from .auth import onInvalidToken
 class SpotifyPlaylist:
     def __init__(self, token):
         self.token = token
+        self.headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self.token}",
+            },
+
         url = "https://api.spotify.com/v1/me/playlists"
         res = requests.get(
             url,
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": "Bearer {}".format(token),
-            },
+            self.headers
         )
 
         if res.status_code != 200:
@@ -34,6 +36,8 @@ class SpotifyPlaylist:
         self.id = id["Select Playlist"]
 
     def getElements(self):
+        print("Getting elements of playlist...")
+
         items = self.getElementsPage(
             f"https://api.spotify.com/v1/playlists/{self.id}/tracks"
         )
@@ -46,10 +50,7 @@ class SpotifyPlaylist:
     def getElementsPage(self, url):
         res = requests.get(
             url,
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.token}",
-            },
+            self.headers
         )
 
         if res.status_code != 200:

@@ -5,6 +5,7 @@ file_name = "token.json"
 
 
 def auth():
+    print("Autoryzowenie...")
     try:
         f = open(file_name)
         data = json.load(f)

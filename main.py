@@ -17,7 +17,9 @@ def spotify():
 
 
 def main():
+    print("======== YouTube ========")
     youtube()
+    print("======== Spotify ========")
     spotify()
 
 

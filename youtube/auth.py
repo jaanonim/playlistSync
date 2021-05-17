@@ -8,6 +8,7 @@ scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
 
 def auth():
+    print("Autoryzowenie...")
 
     # Disable OAuthlib's HTTPS verification when running locally.
     # *DO NOT* leave this option enabled in production.

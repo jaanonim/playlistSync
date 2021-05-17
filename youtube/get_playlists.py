@@ -25,6 +25,8 @@ class YoutubePlaylist:
         self.id = id["Select Playlist"]
 
     def getElements(self):
+        print("Getting elements of playlist...")
+
         items = self.getElementsPage()
         elements = []
         for item in items:
