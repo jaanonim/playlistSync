@@ -1,22 +1,28 @@
 import requests
 from PyInquirer import prompt
+from setting import Settings
 
 from .auth import onInvalidToken
 
 
 class SpotifyPlaylist:
     def __init__(self, token):
-        self.token = token
         self.headers = {
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.token}",
-            },
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        }
+        settingsObj = Settings.getInstance()
+        s = settingsObj.getSettings()
+        if s.get("sp_id"):
+            self.id = s.get("sp_id")
+        else:
+            self.id = self.getId()
+            s["sp_id"] = self.id
+            settingsObj.setSettings(s)
 
+    def getId(self):
         url = "https://api.spotify.com/v1/me/playlists"
-        res = requests.get(
-            url,
-            self.headers
-        )
+        res = requests.get(url, headers=self.headers)
 
         if res.status_code != 200:
             onInvalidToken()
@@ -33,7 +39,7 @@ class SpotifyPlaylist:
                 "choices": playlists,
             }
         )
-        self.id = id["Select Playlist"]
+        return id["Select Playlist"]
 
     def getElements(self):
         print("Getting elements of playlist...")
@@ -50,7 +56,7 @@ class SpotifyPlaylist:
     def getElementsPage(self, url):
         res = requests.get(
             url,
-            self.headers
+            headers=self.headers,
         )
 
         if res.status_code != 200:

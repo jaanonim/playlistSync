@@ -1,12 +1,23 @@
 from PyInquirer import prompt
+from setting import Settings
 
 
 class YoutubePlaylist:
-    def __init__(self,api):
+    def __init__(self, api):
         self.api = api
 
+        settingsObj = Settings.getInstance()
+        s = settingsObj.getSettings()
+        if s.get("yt_id"):
+            self.id = s.get("yt_id")
+        else:
+            self.id = self.getId()
+            s["yt_id"] = self.id
+            settingsObj.setSettings(s)
+
+    def getId(self):
         request = self.api.playlists().list(
-            part="snippet,contentDetails", maxResults=20, mine=True
+            part="snippet,contentDetails", maxResults=100, mine=True
         )
         response = request.execute()
         items = response["items"]
@@ -22,7 +33,7 @@ class YoutubePlaylist:
                 "choices": playlists,
             }
         )
-        self.id = id["Select Playlist"]
+        return id["Select Playlist"]
 
     def getElements(self):
         print("Getting elements of playlist...")
