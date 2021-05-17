@@ -1,19 +1,19 @@
-from spotify import get_playlists as sp_playlists
 from spotify.auth import auth as sp_auth
-from youtube import get_playlists as yt_playlists
+from spotify.get_playlists import SpotifyPlaylist
 from youtube.auth import auth as yt_auth
+from youtube.get_playlists import YoutubePlaylist
 
 
 def youtube():
     api = yt_auth()
-    id = yt_playlists.getPlaylists(api)
-    yt_playlists.getElementsOfPlaylist(id, api)
+    playlist = YoutubePlaylist(api)
+    playlist.getElements()
 
 
 def spotify():
     token = sp_auth()
-    id = sp_playlists.getPlaysists(token)
-    sp_playlists.getElementsOfPlaylist(id, token)
+    playlist = SpotifyPlaylist(token)
+    playlist.getElements()
 
 
 def main():
