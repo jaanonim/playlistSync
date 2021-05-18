@@ -31,6 +31,7 @@ class YoutubeLocal:
                     items.append({"yt": p})
         else:
             for p in playlist:
+                newItems += 1
                 items.append({"yt": p})
         print(f"YouTube: Found {newItems} new tracks.")
         self.settings["items"] = items

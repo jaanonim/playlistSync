@@ -50,6 +50,7 @@ def main():
                 exit()
 
         SpotifyAdd(sp).addItems(items)
+        exit()
     print("There is nothing to sync.")
 
 
