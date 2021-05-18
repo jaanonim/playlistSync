@@ -3,4 +3,5 @@ google-auth-oauthlib
 google-auth-httplib2
 oauth2client
 PyInquirer
-spotipy
+requests
+progress

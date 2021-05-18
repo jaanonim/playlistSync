@@ -1,3 +1,4 @@
+from progress.bar import IncrementalBar
 from setting import Settings
 
 from .search import SpotifySearcher
@@ -20,9 +21,12 @@ class SpotifyLocal:
         if not items:
             items = []
         if len(items) > 0:
+            print("Searching for items in Spotify ")
+            bar = IncrementalBar("", max=len(items))
             for i in items:
                 yt = i.get("yt")
                 sp = i.get("sp")
+                bar.next()
                 if yt:
                     if sp:
                         if sp == "-":
@@ -53,6 +57,7 @@ class SpotifyLocal:
         else:
             print("ERROR: Playlist setting is empty")
             exit()
+        print("")
         print(
             f"Spotify: Found {foundSucces}/{foundSucces+foundFalure} new tarcks and {toSync} old that need to be sync."
         )

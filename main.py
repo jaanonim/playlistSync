@@ -1,5 +1,7 @@
-from analize import Analize
+from PyInquirer import prompt
 
+from setting import Settings
+from spotify.add import SpotifyAdd
 from spotify.auth import auth as sp_auth
 from spotify.get_playlists import SpotifyPlaylist
 from spotify.local import SpotifyLocal
@@ -21,15 +23,34 @@ def spotify():
 
 
 def main():
-    print("======== YouTube ========")
+    print("================ YouTube ================")
     yt = youtube()
-    print("======== Spotify ========")
-    sp = spotify()
+    print()
 
-    print("======== Analize ========")
+    print("================ Spotify ================")
+    sp = spotify()
+    print()
+
+    print("=============== Analizing ===============")
     YoutubeLocal(yt)
-    print("Searching for items in Spotify ...")
-    SpotifyLocal(sp)
+    items = SpotifyLocal(sp).getListToSync()
+    print()
+
+    print("============= Synchronizing =============")
+    length = len(items)
+    if length > 0:
+        if not Settings.getInstance().getSettings().get("skip"):
+            if not prompt(
+                {
+                    "type": "confirm",
+                    "name": "Apply",
+                    "message": f"Add {length} tracks to Spotify playlist?",
+                }
+            )["Apply"]:
+                exit()
+
+        SpotifyAdd(sp).addItems(items)
+    print("There is nothing to sync.")
 
 
 if __name__ == "__main__":

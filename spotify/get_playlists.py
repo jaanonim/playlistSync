@@ -42,6 +42,7 @@ class SpotifyPlaylist:
         return id["Select Playlist"]
 
     def getElements(self):
+
         print("Getting elements of playlist...")
 
         items = self.getElementsPage(
