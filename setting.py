@@ -2,7 +2,6 @@ import json
 
 file_name = "settings.json"
 
-
 class Settings:
     __instance = None
 

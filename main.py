@@ -1,8 +1,11 @@
 from analize import Analize
+
 from spotify.auth import auth as sp_auth
 from spotify.get_playlists import SpotifyPlaylist
+from spotify.local import SpotifyLocal
 from youtube.auth import auth as yt_auth
 from youtube.get_playlists import YoutubePlaylist
+from youtube.local import YoutubeLocal
 
 
 def youtube():
@@ -24,7 +27,9 @@ def main():
     sp = spotify()
 
     print("======== Analize ========")
-    Analize(yt, sp)
+    YoutubeLocal(yt)
+    print("Searching for items in Spotify ...")
+    SpotifyLocal(sp)
 
 
 if __name__ == "__main__":
