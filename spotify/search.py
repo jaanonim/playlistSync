@@ -16,7 +16,6 @@ INLEGAL_WORLDS = [
     "seperate altogether acoustic",
     "official live room session",
     "live @ colour conference 2018",
-    "live",
 ]
 
 
