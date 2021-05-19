@@ -14,6 +14,7 @@ def auth():
         if token == None:
             raise Exception
     except Exception as e:
+        print("https://developer.spotify.com/console/get-several-albums/")
         token = input("Enter spotify token: ")
         with open(file_name, "w") as json_file:
             json.dump({"token": token}, json_file)
