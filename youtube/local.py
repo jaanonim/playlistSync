@@ -18,8 +18,9 @@ class YoutubeLocal:
                 for i in items:
                     element = i.get("yt")
                     if element:
-                        a, b = p
-                        if [a, b] == element:
+                        b, _ = element
+                        a, _ = p
+                        if a == b:
 
                             f = False
                             break

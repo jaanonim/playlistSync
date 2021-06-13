@@ -33,8 +33,9 @@ class SpotifyLocal:
                             continue
                         f = True
                         for p in playlist:
-                            a, b = p
-                            if [a, b] == sp:
+                            a, _ = p
+                            b, _ = sp
+                            if a == b:
                                 f = False
                                 break
                         if not f:
