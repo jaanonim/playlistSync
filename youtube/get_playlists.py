@@ -52,7 +52,11 @@ class YoutubePlaylist:
         request = self.api.playlistItems().list(
             part="contentDetails, snippet", playlistId=self.id, pageToken=page
         )
-        response = request.execute()
+        try:
+            response = request.execute()
+        except Exception as e:
+            print(e)
+            exit()
 
         items = response["items"]
         page = response.get("nextPageToken")
