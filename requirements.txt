@@ -5,3 +5,4 @@ oauth2client
 PyInquirer
 requests
 progress
+spotipy

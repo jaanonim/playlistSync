@@ -2,6 +2,7 @@ env
 .vscode
 client_secret.json
 credentials.json
-token.json
 __pycache__/
 settings.json
+.cache
+spotify.json
