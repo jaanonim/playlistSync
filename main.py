@@ -48,8 +48,9 @@ def main():
                 }
             )["Apply"]:
                 exit()
-
-        SpotifyAdd(sp).addItems(items)
+        print("https://developer.spotify.com/console/get-several-albums/")
+        token = input("Enter spotify token: ")
+        SpotifyAdd((token, None)).addItems(items)
         exit()
     print("There is nothing to sync.")
 
